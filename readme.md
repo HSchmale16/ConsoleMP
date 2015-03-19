@@ -8,4 +8,9 @@ various songs, and how ofter you play them or skip them.
 * NCurses
 * FFmpeg
 * sqlite3
- 
+
+# Installation Depends
+These are various packages that need to be available to install
+this program and add new songs to the database.
+
+* exiftool 
