@@ -3,3 +3,4 @@ ConsoleMP
 *.out
 .depend
 *.db
+*.sqlite
