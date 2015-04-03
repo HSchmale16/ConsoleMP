@@ -15,7 +15,9 @@ SRC       := main.cpp
 
 OBJ       := $(SRC:.cpp=.o)
 
-HEADERS   :=
+# **********************************************
+# Begin Targets
+# **********************************************
 
 all: depend $(EXE)
 
@@ -24,11 +26,20 @@ $(EXE): $(OBJ)
 
 clean:
 	rm -rf *.o
+	if [ -e $(EXE) ] ; then rm $(EXE) ; fi
+
+# ***********************************************		
 # Rules to make various files
+# ***********************************************
+
+# C++ Files
 .cpp.o:
 	$(CXX) -c $(CXX_FLGS) -o $@ $<
 
+# ***********************************************
 # Dependcy Resolution
+# ***********************************************
+
 depend: .depend
 
 .depend: $(SRC) $(HEADERS)

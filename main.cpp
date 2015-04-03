@@ -1,7 +1,16 @@
-#include <cstdio>
-#include <mad.h>
+/**\file   main.cpp
+ * \brief  Console MP Entry Point
+ * \author Henry J Schmale
+ * \date   April 3, 2015
+ *
+ * A console based media player that randomly selects songs from a data
+ * base to play. This is designed to be even lighter then MOCP, because
+ * it lacks a complex UI, and runs very simplely
+ */
 
-static int decode(unsigned char const*, unsigned long);
+#include <cstdio>
+#include <mad.h>      // MP3 Decoding
+#include <sqlite3.h>  // SQLite
 
 int main(){
 
