@@ -4,3 +4,5 @@ ConsoleMP
 .depend
 *.db
 *.sqlite
+*.swp
+*.mp3
