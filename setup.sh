@@ -40,6 +40,7 @@ function escapeStrForSQLite {
 # ***********************************************
 
 # Create Database Table
+rm $dbf
 sqlite3 $dbf \
     'CREATE TABLE if not exists `songs` (
         `id`        INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -52,7 +53,13 @@ sqlite3 $dbf \
         `played`    INTEGER DEFAULT 0
      );'
 
-# Iterate over files in home folder to generate list of songs
+# status msg
+echo "Made SQL tables"
+
+echo "PRAGMA synchronous=0;" > $sqlTMPFile
+# Iterate over files in home folder to generate list of songs in SQL
+# querry format, then dump it to file to be executed later.
+echo "Searching for song data"
 for f in $(find ~/Music -name "*.mp3") ; do
     path=$(escapeStrForSQLite $f ) # File Path
     ffprobe $path 2>&1 | tail -20 > $mytmp
@@ -65,4 +72,8 @@ for f in $(find ~/Music -name "*.mp3") ; do
     echo $sql >> $sqlTMPFile
 done
 
+# Status Msgs
+echo "Finished Collecting Song Data"
+echo "Now Building Database"
 
+sqlite3 $dbf < $sqlTMPFile
