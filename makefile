@@ -10,10 +10,16 @@ CC        := gcc
 C_FLGS    := -std=c11 -I/usr/include/ffmpeg
 CXX       := g++
 CXX_FLGS  := -std=c++11 -I/usr/include/ffmpeg
-LD_FLGS   := -lavformat -lavcodec -lswscale -lz -lSDL
+LD_FLGS   := -lavformat \
+			 -lavcodec \
+			 -lavutil \
+			 -lswscale \
+			 -lz \
+			 -lSDL
 
 # Source Code
-SRC       := main.cpp
+SRC       := main.cpp \
+			 audio.cpp
 
 OBJ       := $(SRC:.cpp=.cpp.o)
 
