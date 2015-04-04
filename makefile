@@ -7,10 +7,10 @@ EXE       := ConsoleMP
 
 # Compiler
 CC        := gcc
-C_FLGS    := -O2
+C_FLGS    := -I/usr/include/ffmpeg
 CXX       := g++
 CXX_FLGS  := -std=c++11
-LD_FLGS   := 
+LD_FLGS   := -lavformat -lavcodec -lswscale -lz
 
 # Source Code
 SRC       := main.c

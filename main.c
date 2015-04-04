@@ -9,8 +9,9 @@
  */
 
 #include <stdio.h>
-#include <mad.h>      // MP3 Decoding
 #include <sqlite3.h>  // SQLite
+#include <ffmpeg/libavcodec/avcodec.h>
+
 
 int main(){
 
