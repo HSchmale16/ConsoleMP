@@ -9,13 +9,13 @@ EXE       := ConsoleMP
 CC        := gcc
 C_FLGS    := -std=c11 -I/usr/include/ffmpeg
 CXX       := g++
-CXX_FLGS  := -std=c++11
+CXX_FLGS  := -std=c++11 -I/usr/include/ffmpeg
 LD_FLGS   := -lavformat -lavcodec -lswscale -lz -lSDL
 
 # Source Code
-SRC       := main.c
+SRC       := main.cpp
 
-OBJ       := $(SRC:.c=.o)
+OBJ       := $(SRC:.cpp=.cpp.o)
 
 # **********************************************
 # Begin Targets
@@ -35,11 +35,11 @@ clean:
 # ***********************************************
 
 # C++ Files
-%.cpp.o:
+%.cpp.o: %.cpp
 	$(CXX) -c $(CXX_FLGS) -o $@ $<
 
 # C Files
-.c.o:
+%.c.o: %.c
 	$(CC) -c $(C_FLGS) -o $@ $<
 
 # ***********************************************
