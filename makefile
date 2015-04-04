@@ -6,14 +6,17 @@
 EXE       := ConsoleMP 
 
 # Compiler
+CC        := gcc
+C_FLGS    := -I/usr/include/ffmpeg
 CXX       := g++
-CXX_FLGS  := -std=c++11
-LD_FLGS   := 
+CXX_FLGS  := -std=c++11 -I/usr/include/ffmpeg
+LD_FLGS   := -lffmpeg 
 
 # Source Code
-SRC       := main.cpp
+SRC       := main.c
 
-OBJ       := $(SRC:.cpp=.o)
+CPPOBJ    := $(SRC:.cpp=.o) 
+COBJ      := $(SRC:.c=.o)
 
 # **********************************************
 # Begin Targets
@@ -21,8 +24,8 @@ OBJ       := $(SRC:.cpp=.o)
 
 all: depend $(EXE)
 
-$(EXE): $(OBJ)
-	$(CXX) $(LD_FLGS) -o $@ $(OBJ)
+$(EXE): $(CPPOBJ) $(COBJ)
+	$(CC) $(LD_FLGS) -o $@ $(COBJ) $(CPPOBJ)
 
 clean:
 	rm -rf *.o
@@ -33,8 +36,12 @@ clean:
 # ***********************************************
 
 # C++ Files
-.cpp.o:
+%.o: %.cpp 
 	$(CXX) -c $(CXX_FLGS) -o $@ $<
+
+# C Files
+%.o: %.c
+	$(CC) $(C_FLGS) -o $@ $<
 
 # ***********************************************
 # Dependcy Resolution
