@@ -6,3 +6,4 @@ ConsoleMP
 *.sqlite
 *.swp
 *.mp3
+test/*
