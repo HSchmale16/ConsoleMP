@@ -1,4 +1,4 @@
-/**\file   main.cpp
+/**\file   main.c
  * \brief  Console MP Entry Point
  * \author Henry J Schmale
  * \date   April 3, 2015
@@ -8,7 +8,7 @@
  * it lacks a complex UI, and runs very simplely
  */
 
-#include <cstdio>
+#include <stdio.h>
 #include <mad.h>      // MP3 Decoding
 #include <sqlite3.h>  // SQLite
 
