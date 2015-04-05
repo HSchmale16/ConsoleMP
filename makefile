@@ -12,12 +12,15 @@ CXX       := g++
 CXX_FLGS  := -std=c++11 -I/usr/include/ffmpeg
 LD_FLGS   := -lavformat \
 			 -lavcodec \
+			 -lavfilter \
 			 -lavutil \
 			 -lswscale \
 			 -lz \
 			 -lSDL
 
 # Source Code
+HEADERS   := audioDecoder.h
+
 CXX_SRC   := main.cpp
 
 C_SRC     := audioDecoder.c

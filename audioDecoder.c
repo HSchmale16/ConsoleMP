@@ -187,7 +187,7 @@ static void print_frame(const AVFrame *frame)
     fflush(stdout);
 }
 
-int main(int argc, char **argv)
+int decodeFile(const char *fname)
 {
     int ret;
     AVPacket packet0, packet;
@@ -198,13 +198,9 @@ int main(int argc, char **argv)
         perror("Could not allocate frame");
         exit(1);
     }
-    if (argc != 2) {
-        fprintf(stderr, "Usage: %s file | %s\n", argv[0], player);
-        exit(1);
-    }
     av_register_all();
     avfilter_register_all();
-    if ((ret = open_input_file(argv[1])) < 0)
+    if ((ret = open_input_file(fname)) < 0)
         goto end;
     if ((ret = init_filters(filter_descr)) < 0)
         goto end;
