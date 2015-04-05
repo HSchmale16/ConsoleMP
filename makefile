@@ -18,10 +18,13 @@ LD_FLGS   := -lavformat \
 			 -lSDL
 
 # Source Code
-SRC       := main.cpp \
-			 audio.cpp
+CXX_SRC   := main.cpp
 
-OBJ       := $(SRC:.cpp=.cpp.o)
+C_SRC     := audioDecoder.c
+
+CXX_OBJ   := $(CXX_SRC:.cpp=.cpp.o)
+
+C_OBJ     := $(C_SRC:.c=.c.o)
 
 # **********************************************
 # Begin Targets
@@ -29,8 +32,8 @@ OBJ       := $(SRC:.cpp=.cpp.o)
 
 all: depend $(EXE)
 
-$(EXE): $(OBJ)
-	$(CXX) $(LD_FLGS) -o $@ $(OBJ)
+$(EXE): $(CXX_OBJ) $(C_OBJ)
+	$(CXX) $(LD_FLGS) -o $@ $(CXX_OBJ) $(C_OBJ)
 
 clean:
 	rm -rf *.o
@@ -54,7 +57,7 @@ clean:
 
 depend: .depend
 
-.depend: $(SRC) $(HEADERS)
+.depend: $(CXX_SRC) $(C_SRC) $(HEADERS)
 	rm -f ./.depend
 	$(CXX) $(CXX_FLGS) -MM $^ > ./.depend
 
