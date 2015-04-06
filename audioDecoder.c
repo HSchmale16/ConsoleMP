@@ -25,6 +25,7 @@
  * * API example for audio decoding and filtering
  * * @example filtering_audio.c
  * */
+#include <stdio.h>
 #include <unistd.h>
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
@@ -33,15 +34,18 @@
 #include <libavfilter/buffersink.h>
 #include <libavfilter/buffersrc.h>
 #include <libavutil/opt.h>
+#include "audioDecoder.h"
 
 static const char *filter_descr = "aresample=44100,aformat=sample_fmts=s16:channel_layouts=stereo";
 static const char *player = "ffplay -f s16le -ar 8000 -ac 1 -";
 static AVFormatContext *fmt_ctx;
-static AVCodecContext *dec_ctx;
-AVFilterContext *buffersink_ctx;
-AVFilterContext *buffersrc_ctx;
-AVFilterGraph *filter_graph;
-static int audio_stream_index = -1;
+static AVCodecContext  *dec_ctx;
+AVFilterContext        *buffersink_ctx;
+AVFilterContext        *buffersrc_ctx;
+AVFilterGraph          *filter_graph;
+static int             audio_stream_index = -1;
+FILE                   *songdata;         // File to hold the decoded data
+char                   sdFname[L_tmpnam]; // Name of the file holding the decoded data.
 
 static int open_input_file(const char *filename)
 {

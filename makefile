@@ -22,7 +22,8 @@ LD_FLGS   := -lavformat \
 # Source Code
 HEADERS   := audioDecoder.h
 
-CXX_SRC   := main.cpp
+CXX_SRC   := main.cpp \
+			 sql.cpp
 
 C_SRC     := audioDecoder.c
 
@@ -40,6 +41,7 @@ $(EXE): $(CXX_OBJ) $(C_OBJ)
 	$(CXX) $(LD_FLGS) -o $@ $(CXX_OBJ) $(C_OBJ)
 
 clean:
+	rm -f .depend
 	rm -rf *.o
 	if [ -e $(EXE) ] ; then rm $(EXE) ; fi
 
