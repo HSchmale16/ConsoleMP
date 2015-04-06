@@ -7,6 +7,10 @@
 
 #include "sql.h"
 
-mediaDB::mediaDB(){
+MediaDB::MediaDB(){
+
+}
+
+MediaDB::~MediaDB(){
 
 }

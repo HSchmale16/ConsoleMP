@@ -8,6 +8,7 @@
 #ifndef SQL_H_INC
 #define SQL_H_INC
 
+#include <string>
 #include <sqlite3.h>
 
 /**\brief The song table creation querry
@@ -29,12 +30,25 @@ const char SQL_SONGS_TB_CREATE[] =
  */
 const char DB_FILE[] = "ConsleMP.sqlite";
 
-class mediaDB{
+/**\brief Struct to hold each song record
+ */
+struct SongData{
+    std::string m_title;
+
+};
+
+/**\brief Media Database Class
+ *
+ * A class with the abilty to build sql querries and return the data
+ * returned by those querries. Has the ability to be highly customized
+ * in instation.
+ */
+class MediaDB{
 public:
-    mediaDB();
-    ~mediaDB();
+    MediaDB();
+    ~MediaDB();
 private:
-    sqlite3 *db;
+    sqlite3 *m_db;
 
 };
 
