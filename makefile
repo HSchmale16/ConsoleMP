@@ -16,7 +16,8 @@ LD_FLGS   := -lavformat \
 			 -lavutil \
 			 -lswscale \
 			 -lz \
-			 -lSDL
+			 -lSDL \
+			 -lsqlite3
 
 # Source Code
 HEADERS   := audioDecoder.h
