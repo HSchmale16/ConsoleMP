@@ -25,6 +25,7 @@
  * * API example for audio decoding and filtering
  * * @example filtering_audio.c
  * */
+#include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -193,11 +194,11 @@ static void print_frame(const AVFrame *frame)
     const uint16_t *p = (uint16_t*)frame->data[0];
     const uint16_t *p_end = p + n;
     while (p < p_end) {
-        fputc(*p & 0xff, stdout);
-        fputc(*p>>8 & 0xff, stdout);
+        fputc(*p & 0xff, songdata);
+        fputc(*p>>8 & 0xff, songdata);
         p++;
     }
-    fflush(stdout);
+    fflush(songdata);
 }
 
 int decodeFile(const char *fname)
@@ -207,6 +208,11 @@ int decodeFile(const char *fname)
     AVFrame *frame = av_frame_alloc();
     AVFrame *filt_frame = av_frame_alloc();
     int got_frame;
+    
+    // Begin Doing Stuff
+    tmpnam(sdFname);
+    fprintf(stderr, "Decoded Data -> %s\n", sdFname);
+    songdata = fopen(sdFname, "w");
     if (!frame || !filt_frame) {
         perror("Could not allocate frame");
         exit(1);
@@ -263,6 +269,7 @@ int decodeFile(const char *fname)
         }
     }
 end:
+    fclose(songdata);
     avfilter_graph_free(&filter_graph);
     avcodec_close(dec_ctx);
     avformat_close_input(&fmt_ctx);
@@ -272,6 +279,5 @@ end:
         fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
         exit(1);
     }
-    exit(0);
 }
 
