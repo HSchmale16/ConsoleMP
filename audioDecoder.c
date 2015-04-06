@@ -25,6 +25,7 @@
  * * API example for audio decoding and filtering
  * * @example filtering_audio.c
  * */
+#include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <libavcodec/avcodec.h>
@@ -36,16 +37,24 @@
 #include <libavutil/opt.h>
 #include "audioDecoder.h"
 
-static const char *filter_descr = "aresample=44100,aformat=sample_fmts=s16:channel_layouts=stereo";
-static const char *player = "ffplay -f s16le -ar 8000 -ac 1 -";
+static const char      *filter_descr = "aresample=44100,aformat=sample_fmts=s16:channel_layouts=stereo";
+static const char      *player = "ffplay -f s16le -ar 8000 -ac 1 -";
 static AVFormatContext *fmt_ctx;
 static AVCodecContext  *dec_ctx;
 AVFilterContext        *buffersink_ctx;
 AVFilterContext        *buffersrc_ctx;
 AVFilterGraph          *filter_graph;
 static int             audio_stream_index = -1;
-FILE                   *songdata;         // File to hold the decoded data
-char                   sdFname[L_tmpnam]; // Name of the file holding the decoded data.
+FILE                   *songdata;             // File to hold the decoded data
+char                   sdFname[L_tmpnam];     // Name of the file holding the decoded data.
+bool                   decoderInitd =  false; // Is the decoder initailized.
+
+int initDecoder(){
+    if(!decoderInitd){
+        av_register_all();
+        avfilter_register_all();
+    }
+}
 
 static int open_input_file(const char *filename)
 {
@@ -202,8 +211,11 @@ int decodeFile(const char *fname)
         perror("Could not allocate frame");
         exit(1);
     }
-    av_register_all();
-    avfilter_register_all();
+    if(!decoderInitd){
+        initDecoder();
+        fprintf(stderr, "Some Idiot forgot to init the decoder system");
+    }
+    
     if ((ret = open_input_file(fname)) < 0)
         goto end;
     if ((ret = init_filters(filter_descr)) < 0)

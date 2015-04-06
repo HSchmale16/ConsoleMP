@@ -10,5 +10,8 @@
 
 char     sdFname[L_tmpnam]; // Name of the file containing the decoded data
 
+/**\brief Initializes the audio decoder system. And starts up ffmpeg
+ */
+int initDecoder();
 
 #endif // AUDIODECODER_H_INC
