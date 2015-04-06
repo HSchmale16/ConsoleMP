@@ -33,8 +33,9 @@ const char DB_FILE[] = "ConsleMP.sqlite";
 /**\brief Struct to hold each song record
  */
 struct SongData{
-    std::string m_title;
-
+    std::string m_title;  //!< Title of the song
+    std::string m_artist; //!< Group who did the song
+    std::string m_path;   //!< Path to that file
 };
 
 /**\brief Media Database Class
