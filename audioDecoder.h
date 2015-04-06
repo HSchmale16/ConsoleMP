@@ -14,6 +14,6 @@ char     sdFname[L_tmpnam]; // Name of the file containing the decoded data
  */
 int initDecoder();
 
-int decodeFile(char *fname);
+int decodeFile(const char *fname);
 
 #endif // AUDIODECODER_H_INC

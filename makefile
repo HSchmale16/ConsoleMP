@@ -25,7 +25,8 @@ HEADERS   := audioDecoder.h
 CXX_SRC   := main.cpp \
 			 sql.cpp
 
-C_SRC     := audioDecoder.c
+C_SRC     := audioDecoder.c \
+			 playback.c
 
 CXX_OBJ   := $(CXX_SRC:.cpp=.cpp.o)
 

@@ -7,5 +7,5 @@ extern "C"{
 #include "sql.h"
 
 int main(int argc, char *argv[]){
-    decodeFile(argv[1]);
+    initDecoder();
 }

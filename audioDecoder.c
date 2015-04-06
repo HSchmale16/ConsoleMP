@@ -54,6 +54,7 @@ int initDecoder(){
     if(!decoderInitd){
         av_register_all();
         avfilter_register_all();
+        decoderInitd = true;
     }
 }
 
