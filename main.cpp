@@ -3,6 +3,7 @@
 
 extern "C"{
     #include "audioDecoder.h"
+    #include "playback.h"
 }
 #include "sql.h"
 
