@@ -6,3 +6,7 @@
  */
 
 #include "sql.h"
+
+mediaDB::mediaDB(){
+
+}

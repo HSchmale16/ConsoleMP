@@ -8,7 +8,11 @@
 #ifndef SQL_H_INC
 #define SQL_H_INC
 
-const char SQL_SONGS_TB_CREATE = 
+#include <sqlite3.h>
+
+/**\brief The song table creation querry
+ */
+const char SQL_SONGS_TB_CREATE[] = 
 "CREATE TABLE `songs` ("
     "`id`    INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,"
     "`title` TEXT NOT NULL,"        //!< Song Title
@@ -19,6 +23,19 @@ const char SQL_SONGS_TB_CREATE =
     "`rating`INTEGER DEFAULT 0,"    //!< 0-5 Star Rating
     "`played`INTEGER DEFAULT 0,"    //!< Times Played
     "`tags`  TEXT"                  //!< tags for this song
-    ");"
+    ");";
+
+/**\brief The database file path
+ */
+const char DB_FILE[] = "ConsleMP.sqlite";
+
+class mediaDB{
+public:
+    mediaDB();
+    ~mediaDB();
+private:
+    sqlite3 *db;
+
+};
 
 #endif // SQL_H_INC
