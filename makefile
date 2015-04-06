@@ -20,7 +20,9 @@ LD_FLGS   := -lavformat \
 			 -lsqlite3
 
 # Source Code
-HEADERS   := audioDecoder.h
+HEADERS   := audioDecoder.h \
+			 sql.h \
+			 playback.h
 
 CXX_SRC   := main.cpp \
 			 sql.cpp

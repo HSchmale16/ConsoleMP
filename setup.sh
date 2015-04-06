@@ -50,7 +50,8 @@ sqlite3 $dbf \
         `path`      TEXT NOT NULL UNIQUE,
         `year`      INTEGER,
         `rating`    INTEGER DEFAULT 0,
-        `played`    INTEGER DEFAULT 0
+        `played`    INTEGER DEFAULT 0,
+        `tags`      TEXT
      );'
 
 # status msg
